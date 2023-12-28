@@ -1,0 +1,77 @@
+<div class="min-h-full grid grid-flow-row auto-rows-max">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img class="h-8 w-8" src="./assets/bus.png" alt="Your Company">
+          </div>
+          <div>
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">Мониторинг</a>
+              <a href="/#/control" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Управление</a>
+              <a href="/#/report" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-bold">Отчетность</a>
+              <a href="/#/admin" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Админ-панель</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header class="bg-white shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Отчетность</h1>
+      </div>
+    </header>
+  </nav>
+  <div>
+    <div class="bg-white m-6 p-5 rounded-lg shadow">
+      <div class="mb-2">
+        <span class="text-2xl mx-2">Отчет по срезу зарядных сессий</span>
+      </div>
+      <form [formGroup]="dateRangeForm" class="flex items-end">
+        <div class="flex flex-col mx-3">
+          <label for="startDate">Начальная дата:</label>
+          <input id="startDate" type="date" formControlName="startDate" class="rounded p-2 bg-gray-500 text-white font-bold">
+        </div>
+
+        <div class="flex flex-col mx-3">
+          <label for="endDate">Конечная дата:</label>
+          <input id="endDate" type="date" formControlName="endDate" class="rounded p-2 bg-gray-500 text-white font-bold">
+        </div>
+        <button class="p-2 mx-3 bg-gray-500 text-white rounded" (click)="submit()">Экспорт</button>
+      </form>
+    </div>
+
+    <div class="bg-white m-6 p-5 rounded-lg shadow">
+      <div class="mb-2">
+        <span class="text-2xl mx-2">Отчет по зарядной сессии</span>
+      </div>
+      <div class="flex">
+        <ng-container *ngFor="let session of sessions">
+          <div class="m-3 p-2 bg-gray-500 text-white rounded-lg cursor-pointer hover:bg-gray-400" (click)="getSession(session.sessionName)">Сессия: {{session.sessionName}}</div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="bg-white p-5 m-6 rounded-lg shadow">
+      <div class="mb-2">
+        <span class="text-2xl mx-2">Отчет по ошибкам зарядной станции</span>
+      </div>
+
+      <div>
+        <form [formGroup]="errorDateRangeForm" class="flex items-end">
+          <div class="flex flex-col mx-3">
+            <label for="errorStartDate">Начальная дата:</label>
+            <input id="errorStartDate" type="date" formControlName="errorStartDate" class="rounded p-2 bg-gray-500 text-white font-bold">
+          </div>
+
+          <div class="flex flex-col mx-3">
+            <label for="errorEndDate">Конечная дата:</label>
+            <input id="errorEndDate" type="date" formControlName="errorEndDate" class="rounded p-2 bg-gray-500 text-white font-bold">
+          </div>
+          <button (click)="generateErrorsPDFReport()" class="p-2 mx-2 bg-gray-500 text-white rounded">Экспорт</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

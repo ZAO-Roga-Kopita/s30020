@@ -1,0 +1,80 @@
+<div class="min-h-full">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img class="h-8 w-8" src="./assets/bus.png" alt="Your Company">
+          </div>
+          <div>
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">Мониторинг</a>
+              <a href="/#/control" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Управление</a>
+              <a href="/#/report" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Отчетность</a>
+              <a href="/#/admin" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Админ-панель</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Мониторинг</h1>
+    </div>
+  </header>
+  <div>
+    <div class="mx-auto max-w-full pt-6 sm:px-6 lg:px-8">
+      <div class="bg-white py-12 sm:py-12 rounded-lg shadow">
+        <div class="mx-auto px-6 lg:px-8">
+          <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+            <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+              <dt class="text-base leading-7 text-gray-600">Статус зарядной станции</dt>
+              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">ЗАРЯД</dd>
+            </div>
+            <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+              <dt class="text-base leading-7 text-gray-600">Входное напряжение станции</dt>
+              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">100 V</dd>
+            </div>
+            <div class="mx-auto flex max-w-xs flex-col gap-y-4">
+              <dt class="text-base leading-7 text-gray-600">Допустимый ток зарядной сессии</dt>
+              <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">100 A</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-full sm:px-6 lg:px-8">
+      <div class="pt-6">
+        <div class="mx-auto bg-white rounded-lg shadow px-6 lg:px-8">
+          <dl class="grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3">
+            <div class="mx-auto flex max-w-xs p-12 flex-col gap-y-4 rounded-lg">
+              <dt class="text-base leading-7 text-gray-600 text-xl">Заряд</dt>
+              <dt class="text-base leading-7 text-gray-600 text-xl">MAX 70</dt>
+              <dt class="text-base leading-7 text-gray-600 text-xl">EVCC 100</dt>
+              <dd class="order-first"><ngx-gauge [value]="gaugeValue" [append]="'%'"></ngx-gauge></dd>
+            </div>
+            <div class="mx-auto flex max-w-xs p-12 flex-col gap-y-4 rounded-lg">
+              <dt class="text-base leading-7 text-gray-600 text-xl">Напряжение</dt>
+              <dt class="text-base leading-7 text-gray-600 text-xl">MAX 999</dt>
+              <dt class="text-base leading-7 text-gray-600 text-xl">EVCC 666</dt>
+              <dd class="order-first"><ngx-gauge [value]="gaugeValue" [append]="'V'" [min]="0" [max]="999"></ngx-gauge></dd>
+            </div>
+            <div class="mx-auto flex max-w-xs p-12 flex-col gap-y-4 rounded-lg">
+              <dt class="text-base leading-7 text-gray-600 text-xl">Ток</dt>
+              <dt class="text-base leading-7 text-gray-600 text-xl">MAX 450</dt>
+              <dt class="text-base leading-7 text-gray-600 text-xl">EVCC 300</dt>
+              <dd class="order-first"><ngx-gauge [value]="gaugeValue" [append]="'A'" [min]="0" [max]="450"></ngx-gauge></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-auto max-w-full mt-3 mb-3 rounded sm:px-6 lg:px-8 py-6">
+      <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height: '100%'}" (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+    </div>
+  </div>
+</div>

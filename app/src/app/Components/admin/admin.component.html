@@ -1,0 +1,66 @@
+<div class="min-h-screen">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img class="h-8 w-8" src="./assets/bus.png" alt="Your Company">
+          </div>
+          <div>
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">Мониторинг</a>
+              <a href="/#/control" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Управление</a>
+              <a href="/#/report" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Отчетность</a>
+              <a href="/#/admin" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-bold">Админ-панель</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Админ-панель</h1>
+    </div>
+  </header>
+  <div>
+    <div class="bg-white m-6 shadow">
+      <div class="overflow-x-auto border-x border-t">
+        <table class="table-auto w-full">
+          <thead class="border-b">
+          <tr class="bg-gray-100">
+            <ng-container *ngFor="let item of tablesNames">
+              <th class="text-left p-4 font-medium">
+                {{item}}
+              </th>
+            </ng-container>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let item of tableData">
+            <tr class="border-b hover:bg-gray-50">
+              <td class="p-4">
+                {{item.name}}
+              </td>
+              <td class="p-4">
+                {{item.tabNumber}}
+              </td>
+              <td class="p-4">
+                <a class="hover:text-blue-500" href="tel:{{item.phone}}">{{item.phone}}</a>
+              </td>
+              <td class="p-4">
+                <a class="hover:text-blue-500" href="mailto:{{item.email}}">{{item.email}}</a>
+              </td>
+              <td class="p-4">
+                {{translatePermission(item.permission)}}
+              </td>
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

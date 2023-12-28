@@ -1,0 +1,104 @@
+<div class="min-h-full grid grid-flow-row auto-rows-max">
+  <nav class="bg-gray-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img class="h-8 w-8" src="./assets/bus.png" alt="Your Company">
+          </div>
+          <div>
+            <div class="ml-10 flex items-baseline space-x-4">
+              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold" aria-current="page">Мониторинг</a>
+              <a href="/#/control" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-bold">Управление</a>
+              <a href="/#/report" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Отчетность</a>
+              <a href="/#/admin" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">Админ-панель</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header class="bg-white shadow">
+      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">Управление</h1>
+      </div>
+    </header>
+  </nav>
+  <div>
+    <div class="mx-3 my-3 p-6 bg-white rounded shadow">
+      <div class="text-2xl font-bold mb-4">Настройка расписания</div>
+      <div>
+        <form [formGroup]="scheduleFormGroup">
+          <div class="flex flex-col mb-4">
+            <label class="text-xl mb-1" for="chargePercent">Максимальный процент заряда отключения ЭТС в диапазоне 0-100 %</label>
+            <div class="flex items-center">
+              <input id="chargePercent" formControlName="chargePercent" type="range" min="0" max="100" [value]="chargePercent" (input)="onChargePercentChange($event)" class="max-w-sm h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+              <span class="px-2">{{chargePercent}}%</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col mb-4">
+            <label class="text-xl mb-1" for="maxChargeCurrent">Максимальный зарядный ток в диапазоне 0-500A</label>
+            <div class="flex items-center">
+              <input id="maxChargeCurrent" formControlName="maxChargeCurrent" type="range" min="0" max="500" [value]="chargeCurrent" (input)="onChargeCurrentChange($event)" class="max-w-sm h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+              <span class="px-2">{{chargeCurrent}}A</span>
+            </div>
+          </div>
+
+
+
+          <div class="mb-4">
+            <div class="text-xl mb-1">Допустимый лимит температуры зарядной станции</div>
+            <div>
+              <input id="maxTemperature" formControlName="maxTemperature" type="range" min="0" max="100" [value]="maxTemperature" (input)="onTemperatureChange($event)" class="max-w-sm h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+              <span class="ml-3">{{maxTemperature}}°C</span>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="text-xl mb-1">Допустимый лимит входного напряжения зарядной станции</div>
+            <div class="flex items-center">
+              <input id="maxVoltage" formControlName="maxVoltage" type="range" min="0" max="350" [value]="maxVoltage" (input)="onVoltageChange($event)" class="max-w-sm h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+              <span class="ml-3">{{maxVoltage}}V</span>
+            </div>
+          </div>
+
+
+          <div>
+            <div class="text-xl mb-1">Диапазон времени в течении суток</div>
+            <div class="flex mb-4">
+              <div class="flex items-center mr-6">
+                <label for="startTime">Начало</label>
+                <input id="startTime" formControlName="startTime" type="time" class="rounded shadow bg-gray-100 p-2 mx-3 cursor-pointer hover:bg-gray-200">
+              </div>
+
+              <div class="flex items-center">
+                <label for="endTime">Конец</label>
+                <input id="endTime" formControlName="endTime" type="time" class="rounded shadow bg-gray-100 p-2 mx-3 cursor-pointer hover:bg-gray-200">
+              </div>
+            </div>
+          </div>
+
+          <button class="p-2 bg-gray-500 text-white rounded" (click)="submit()">Добавить расписание</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white rounded p-6 m-3 shadow">
+    <ng-container *ngFor="let item of schedule">
+      <div class="border rounded shadow flex items-center p-3">
+        <div>
+          <div>начало: {{item.startTime}}</div>
+          <div>конец: {{item.endTime}}</div>
+        </div>
+        <div class="m-2">заряд: {{item.chargePercent}}%</div>
+
+        <div class="m-2">максимальная температура: {{item.maxTemperature}}С</div>
+
+        <div class="m-2">
+          <div>максимальный зарядные ток: {{item.maxChargeCurrent}}А</div>
+          <div>максимальная мощность: {{item.maxVoltage}}С</div>
+        </div>
+        </div>
+    </ng-container>
+  </div>
+</div>
